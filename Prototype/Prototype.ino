@@ -137,8 +137,6 @@ void loop() {
       relaysOff();
     }
     switchStatus = !switchStatus;
-
-    
   }
   
   //Change display only if distance changes
@@ -201,14 +199,10 @@ void cleanPumps() {
 void relaysOn() {
   // There are problems with current draw (?)
   Serial.println("Turning on...");
-  digitalWrite(relayPin1, relayOn);
-  delay(150);
-  digitalWrite(relayPin2, relayOn);
-  delay(150);
-  digitalWrite(relayPin3, relayOn);
-  delay(150);
-  digitalWrite(relayPin4, relayOn);
-  delay(150);
+  for (int i = 0; i < sizeof(relayPins); i++) {
+    digitalWrite(relayPins[i], relayOn);
+    delay(250);
+  }
   digitalWrite(LED_BUILTIN, HIGH); 
 }
 

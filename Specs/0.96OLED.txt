@@ -1,0 +1,7 @@
+0,96 Pulgadas
+128x64 píxeles
+I2C SSD1306
+0,04W - 0,08 W
+
+Linea 15 amarillo
+Linea 16 azul

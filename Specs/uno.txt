@@ -1,0 +1,9 @@
+20-40 mA - GPIO Pins
+200 mA - Suma de GPIO pins
+450 mA - 5v line USB
+750 mA - 5v line jack
+7-12V External PSU (VIN sin diodo)
+
+I2C:
+  A4 - SDA
+  A5 - SCK

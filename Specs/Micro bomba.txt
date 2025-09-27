@@ -1,0 +1,17 @@
+Micro bomba peristaltica
+Tamaño del tubo: 2,5mm * 4,5mm
+6v  - 0,5 A
+12v - 0,6 A
+
+12 V 293,8 g/min
+11 V 272,8 g/min
+10 V 242,8 g/min
+9 V 216,2 g/min
+8 V 188,8 g/min
+7 V 161,2 g/min
+6 V 132,2 g/min
+5 V 101,0 g/min
+4 V 71,3 g/min
+3 V 39,2 g/min (pasealmente funcionando)
+12 V 295,0 g/min
+13 V 323,3 g/min

@@ -16,6 +16,7 @@
 #define ledPin 12
 
 const byte relayPins[] = {relayPin1, relayPin2, relayPin3, relayPin4};
+byte relayStatus[] = {0, 0, 0, 0};
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
@@ -78,6 +79,14 @@ void setup() {
   //display.setCursor(10, 20);
   //display.print("ON");
   display.display();
+
+  Serial.println("Options: ");
+  Serial.println("--------------------");
+  Serial.println("  [0] - All pumps off");
+  Serial.println("  [.] - All pumps on");
+  Serial.println("  [t] - Turn on/off pumps sequentially");
+  Serial.println("  [1-4] - Toggle pump with number");
+  Serial.println("--------------------");
 }
 
 void loop() {
@@ -88,15 +97,23 @@ void loop() {
     char ch = Serial.read();
     if (ch == '0') {
       relaysOff();
-    } else if (ch == '1') {
+    } else if (ch == '.') {
       relaysOn();
     } else if (ch == 't') {
       testPumps();
-    } else if (ch == '.') {
+    } else if (ch == 'x') {
       delay(5000);
       digitalWrite(relayPin4, relayOn);
       delay(5000);
       digitalWrite(relayPin4, relayOff);
+    } else if (ch == '1') {
+      pumpOn(1);
+    } else if (ch == '2') {
+      pumpOn(2);
+    } else if (ch == '3') {
+      pumpOn(3);
+    } else if (ch == '4') {
+      pumpOn(4);
     }
   }
 
@@ -204,7 +221,24 @@ void relaysOff() {
   digitalWrite(LED_BUILTIN, LOW);
 }
 
-// When only connecting one pump with 2 relays
+void pumpOn(int n) {
+  int index = n - 1;
+  if (relayStatus[index] == 0) {
+    Serial.print("Turning pump ");
+    Serial.print(index);
+    Serial.println(" on");
+    digitalWrite(relayPins[index], relayOn);
+    relayStatus[index] = 1;
+  } else if (relayStatus[index] == 1) {
+    Serial.print("Turning pump ");
+    Serial.print(index);
+    Serial.println(" off");
+    digitalWrite(relayPins[index], relayOff);
+    relayStatus[index] = 0;
+  }
+}
+
+// Only when connecting one pump with 2 relays
 void switchRelays() {
   if (switchStatus == 1) {
     digitalWrite(relayPin1, relayOff);

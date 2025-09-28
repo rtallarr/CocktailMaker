@@ -102,18 +102,18 @@ void loop() {
     } else if (ch == 't') {
       testPumps();
     } else if (ch == 'x') {
-      delay(5000);
+      delay(2500);
       digitalWrite(relayPin4, relayOn);
-      delay(5000);
+      delay(2500);
       digitalWrite(relayPin4, relayOff);
     } else if (ch == '1') {
-      pumpOn(1);
+      togglePump(1);
     } else if (ch == '2') {
-      pumpOn(2);
+      togglePump(2);
     } else if (ch == '3') {
-      pumpOn(3);
+      togglePump(3);
     } else if (ch == '4') {
-      pumpOn(4);
+      togglePump(4);
     }
   }
 
@@ -131,11 +131,7 @@ void loop() {
     lastButtonPressed = currentTime;
     Serial.print("Button pressed: ");
     Serial.println(switchStatus);
-    if (!switchStatus) {
-      relaysOn();
-    } else {
-      relaysOff();
-    }
+    togglePump(1);
     switchStatus = !switchStatus;
   }
   
@@ -215,7 +211,7 @@ void relaysOff() {
   digitalWrite(LED_BUILTIN, LOW);
 }
 
-void pumpOn(int n) {
+void togglePump(int n) {
   int index = n - 1;
   if (relayStatus[index] == 0) {
     Serial.print("Turning pump ");
